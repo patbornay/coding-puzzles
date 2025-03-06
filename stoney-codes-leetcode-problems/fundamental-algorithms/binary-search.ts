@@ -19,7 +19,26 @@ function binarySearch(nums, target) {
     return -1;
 }
 
-// xx/03/25 rep
+// 07/03/25 rep
+// - nums is expected to be ordered
+const binarySearch = (nums: number[], target: number): number => {
+    let leftIndex = 0;
+    let rightIndex = nums.length -1;
+
+    while (leftIndex <= rightIndex) {
+        const midIndex = Math.floor((leftIndex + rightIndex) / 2);
+        if (nums[midIndex] === target) {
+            return midIndex;
+        }
+        if (nums[midIndex] <= target) {
+            leftIndex = midIndex +1;
+        }
+        else {
+            rightIndex = midIndex -1;
+        }
+    }
+    return -1
+}
 
 // 06/03/25 rep
 // requirements: the provided array is sorted
