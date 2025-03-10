@@ -43,6 +43,23 @@ const binarySearch = (nums: number[], target: number): number => {
 // works by dividing an ordered list until only the target remains or nothing is found
 // space complexity O(1) 
 
+// 11/03/rep
+const binarySearch = (nums: number[], target: number): number => {
+    let left = 0;
+    let right = nums.length - 1;
+
+    while (left < right) {
+        const mid = Math.floor((left + right) / 2);
+        if (nums[mid] === target) return mid;
+        if (nums[mid] < target) left = mid + 1;
+        else right = mid - 1
+    }
+
+    return -1
+}
+// space complexity O(1)
+// time complexity O(log n)
+// requires an ordered input 
 
 // 07/03/25 rep
 // - nums is expected to be ordered
