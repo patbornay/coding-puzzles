@@ -125,4 +125,10 @@ console.log(mergeSort([6, 3, 8, 5, 2]));
 // mergeSort 0th rc call return a SORTED ARRAY! [2,3,5,6,8]
 
 // how is this method better than insert sort or selection sort? 
-// - merge sort makes less passes
+// - merge sort makes less passes as we are dividing the array all the way down to a single element
+// - then as it is put back together we are sorting each smaller section
+// - as we continue back up we have most elements sorted, 
+//      - so even if the smallest element is on the very end of the array, it will keep getting pushed to the front
+//      - of each chunk as we go back up the call stack
+//      - untill we reach the very end, yes this still means a lot of comparisions BUT far less than insertion which MUST
+//      - compare with each element in the sorted array to identify where the next unsorted element should be in the sorted array
