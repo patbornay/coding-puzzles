@@ -29,32 +29,100 @@ const merge = (left: number[], right: number[]) => {
 
 console.log(mergeSort([6, 3, 8, 5, 2]));
 // execution path 
-// mergeSort gets [6,3,8,5,2]
+// mergeSort 0th rc call gets [6,3,8,5,2]
 //  - mid = 2
-//  - left 1st recursive call (1st rc) mergeSort(nums.slice(0, 2)) slice result [6,3,8]
-//  - right 1st recursive call (2nd rc) mergeSort(nums.slice(2)) slice result [5,2]
+//  - 1st recursive call (1st rc) mergeSort(nums.slice(0, 2)) slice result [6,3,8]
+//  - pending right recursive call mergeSort(nums.slice(2)) slice result [5,2]
 
-// mergeSort left 1st rc gets [6,3,8]
+// mergeSort 1st rc mergeSort call gets [6,3,8]
 //  - mid = 1
-//  - left 2nd rc mergeSort(nums.slice(0, 1)) slice result [6,3]
-//  - right 2nd rc mergeSort(nums.slice(1)) slice result [8]
+//  - 3rd rc mergeSort(nums.slice(0, 1)) slice result [6,3]
+//  - pending right mergeSort(nums.slice(1)) slice result [8]
 
-// mergeSort left 2nd rc gets [6,3]
+// mergeSort 3rd rc mergeSort call gets [6,3]
 //  - mid = 0
-//  - left 3rd rc mergeSort(nums.slice(0, 0)) slice result [6]
-//  - right 3rd rc mergeSort(nums.slice(0)) slice result[3]
+//  - left 4th rc mergeSort(nums.slice(0, 0)) slice result [6]
+//  - pending rc mergeSort(nums.slice(0)) slice result[3]
 
-// mergeSort left 3rd rc gets [6]
+// mergeSort 4th rc mergeSort call gets [6]
+// - immediately return nums, no left/right rc calls
 // - leng === 1 return [6]
+// mergeSort 3rd rc left mergeSort call complete! mergeSort 2nd rc call continues to right mergeSort call
 
-// mergeSort right 3rd rc gets [3]
+// mergeSort 5th rc (pending right mergeSort in 3rd rc) gets [3]
+// - immediately return nums, no left/right rc calls
 //  - leng === 1 return [3]
+// mereSort 3rd rc right mergeSort call complete! mergeSort 2nd rc continues to merge() call
 
-// mergeSort left 2nd rc continued
+// mergeSort 3rd rc continued to merge call
 // - merge([6], [3])
 // - merge (res [], i = 0, j = 0)
-//      - while i < 1 && j < 1
-//          - if (left[0] < right[0]) result.push(left[i++]); // result is now [6] i is incremented
-//      - exit loop
-//      - result.contact(left.slice(i)).concat(right.slice(j));
-//      - this basically merges the remaining elements to results
+//      - while i < left.legnth (1) && j < right.length (1)
+//          - if (left[0] < right[0]) FALSE
+//          - results.push(right[j and increment]) // results contains [3] j = 1
+//      - exit loop bc j is not longer < 1
+//      - result.concat(left.slice(i)).concat(right.slice(j));
+//          - result.concat(left.slice(0), right.slice(1));
+//          - result.concat([6], []) // bc we only incremented j which also takes the last value in right array
+//      - return [3, 6]; SORTED!!
+// mergeSort 3rd rc completed! now we continue to the 1st mergeSort call
+
+// mergeSort 1st rc mergeSort call continued 
+// - mid = 1
+// - left = [3,6]
+// - right = mergeSort(nums.slice(mid)) // nums.slice([8])
+
+// mergeSort right 6th rc call
+// - immediately return nums, no left/right rc calls
+// - leng === 1 return [8]
+
+// mergeSort 1st rc mergeSort continued
+// - mid = 1
+// - left = [3,6]
+// - right = [8]
+// call merge([3,6], [8])
+
+// mergeSort 1st rc left merge call ([3,6], [8])
+// - res [], i = 0, j = 0
+// - while i < left.leng (2) && j < right.leng (1)
+//      - if (left[0] < right[0]) TRUE add left[0] to res // add 3 to res, i incremented to 1
+//      - if (left[1] < right[0]) TRUE add left[1] to res // add 6 to res, i incremented to 2
+// - exit loop i is NOT < left.leng 
+// return [3,6].concat(left.slice(i), right.slice(j)); // [3,6].concat([], [8])
+
+// mergeSort 0th rc call
+// mid = 2
+// left = [3,6,8]
+// right = mergeSort([5,2])
+
+// mergeSort 7th rc right mergeSort([5,2])
+// mid = 1
+// left = mergeSort([5]) // 8th rc immediate returns 5
+// right = mergeSort([2]) // 9th rc immediate returns 2
+// merge([5], [2])
+// - res [], i = 0, j = 0
+// - while i < left.leng (1) && j < right.leng (1)
+//      - if (left[0] < right[0]) FALSE
+//      - else add right[0] to res // res is now [2]
+// - exit loop 
+// - return [2].concat(left.slice(i), right.slice(j)) // [2].concat([], [5]);
+// 7th rc complete! return to 0th rc
+
+// mergeSort 0th rc call
+// mid = 2
+// left = [3,6,8]
+// right = [2,5]
+// return merge([3,6,8], [2,5])
+// - merge call
+//      - res [], i = 0, j = 0
+//      - while i < left.leng (3) && j < right.leng (2)
+//          - if (left[0] < right[0]) FALSE // else add 2 to res and increment j to 1
+//          - if (left[0] < right[1]) TRUE add left[0] to res // add 3 to res, i incremented to 1 // res [2,3]
+//          - if (left[1] < right[1]) FALSE // else add 5 to res and increment j to 2
+//      - exit loop j is NOT < 2 
+// - return res.concat(left.slice(i), right.slice(j)) // [2,3,5].concat(left.slice(1), right.slice(2)) // [2,3,5].concat([6,8], []) // [2,3,5,6,8]
+
+// mergeSort 0th rc call return a SORTED ARRAY! [2,3,5,6,8]
+
+// how is this method better than insert sort or selection sort? 
+// - merge sort makes less passes
