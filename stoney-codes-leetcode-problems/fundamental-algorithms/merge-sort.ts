@@ -10,7 +10,7 @@ const mergeSort = (nums: number[]): number[] => {
     if (nums.length <= 1) return nums;
 
     const mid = Math.floor(nums.length / 2);
-    const  left = mergeSort(nums.slice(0, mid));
+    const left = mergeSort(nums.slice(0, mid));
     const right = mergeSort(nums.slice(mid));
 
     return merge(left, right);
@@ -28,6 +28,31 @@ const merge = (left: number[], right: number[]) => {
 }
 
 console.log(mergeSort([6, 3, 8, 5, 2]));
+
+
+// rep 15/03/25 
+const mergeSort1 = (nums: number[]): number[] => {
+    if (nums.length <= 1) return nums;
+
+    const mid = Math.floor(nums.length / 2);
+    const left = mergeSort1(nums.slice(0, mid));
+    const right = mergeSort1(nums.slice(mid));
+
+    return merge1(left , right);
+}
+
+const merge1 = (left: number[], right: number[]): number[] => {
+    let result: number[] = [], i = 0, j = 0;
+    while (i < left.length && j < right.length) {
+        if (left[i] < right[j]) result.push(left[i++]);
+        else result.push(right[j++]);
+    }
+
+    return result.concat(left.slice(i).concat(right.slice(j)));
+}
+
+
+
 // execution path 
 // mergeSort 0th rc call gets [6,3,8,5,2]
 //  - mid = 2
