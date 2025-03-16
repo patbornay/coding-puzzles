@@ -29,6 +29,29 @@ const merge = (left: number[], right: number[]) => {
 
 console.log(mergeSort([6, 3, 8, 5, 2]));
 
+// rep 16/03/25
+const mergeSort2 = (nums: number[]): number[] => {
+    if (nums.length <= 1) return nums;
+
+    const mid = Math.floor((nums.length)/ 2);
+    const left = mergeSort2(nums.slice(0, mid));
+    const right = mergeSort2(nums.slice(mid))
+
+    return merge(left, right);
+}
+
+const merge2 = (left: number[], right: number[]) => {
+    let result: number[] = [], i = 0, j = 0;
+
+    while (i < left.length && j < right.length) { // iterating one by one on both arrays, pushing to results until we hit the end of either left or right
+        if (left[i] < right[j]) result.push(left[i++]);
+        else result.push(right[j++]);
+    }
+
+    return result.concat(left.slice(i).concat(right.slice(j))); // join the remainder of the arrays to the results for futher sorting, they should all be in order now
+}
+// time O(n log n)
+// space O(n)
 
 // rep 15/03/25 
 const mergeSort1 = (nums: number[]): number[] => {
