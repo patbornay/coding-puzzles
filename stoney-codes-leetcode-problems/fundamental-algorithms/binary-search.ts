@@ -19,6 +19,19 @@ function binarySearch(nums, target) {
     return -1;
 }
 
+// 16/03/25 rep
+const binarySearch = (nums: number[], target: number): number => {
+    let left = 0; // mark the left 'already searched' side of the array
+    let right = nums.length; // mark the right 'already searched' side of the array
+    while (left < right ) { // until our markers cross 
+        const mid = Math.floor((left + right) / 2);  // calculate the middle value between the two markers 
+        if (nums[mid] === target) return mid; // if the value at the mid index is what were looking for reurn the mid index
+        if (nums[mid] < target) left = mid + 1; // if mid value is less than target then we can ignore any index less than mid
+        else right = mid - 1; // mid is greater than target then we can set right to mid - 1 to ignore any index greater than mid - 1
+    }
+    return -1;
+}
+
 // 15/03/25 rep
 const binarySearch = (nums: number[], target: number): number => {
     let left = 0;
