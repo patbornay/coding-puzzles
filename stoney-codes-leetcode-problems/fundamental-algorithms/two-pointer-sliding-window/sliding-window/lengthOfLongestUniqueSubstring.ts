@@ -16,3 +16,20 @@ const lengthOfLongestUniqueSubstring1 = (s: string): number => {
     return maxLength; // return the longest length found
 }
 console.log(lengthOfLongestUniqueSubstring('abcabcbb')); // output: 3 ('abc')
+
+
+// rep 17/03/25
+const lengOfLongestUniqSubStr = (s: string): number => {
+    const charSet = new Set<string>();
+    let left = 0, maxLength = 0;
+
+    for (let right = 0; right < s.length; right++) {
+        while (charSet.has(s[right])) { // this will keep shrinking the unique char set window untill we are back to uniqur characters
+            charSet.delete(s[left]);
+            left++; 
+        }
+        charSet.add(s[right]);
+        maxLength = Math.max(maxLength, right - left + 1) // right - left is how we figure out what number of indexes the window covers 
+        // the + 1 is because we are using zero based indexing
+    }
+}

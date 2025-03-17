@@ -19,8 +19,23 @@ function binarySearch(nums, target) {
     return -1;
 }
 
+const binarySearch10 = (nums: number[], target: number): number => {
+    let left = 0;
+    let right = nums.length - 1;
+
+    while (left < right) {
+        // mid of the array is right index + left index for offsetting then dividing by 2
+        const mid = Math.floor((right + left) / 2);
+        if (nums[mid] === target) return mid;
+        if (nums[mid] < target) left = mid - 1;
+        else right = mid + 1;
+    }
+
+    return -1;
+}
+
 // 16/03/25 rep
-const binarySearch = (nums: number[], target: number): number => {
+const binarySearch9 = (nums: number[], target: number): number => {
     let left = 0; // mark the left 'already searched' side of the array
     let right = nums.length; // mark the right 'already searched' side of the array
     while (left < right ) { // until our markers cross 
@@ -33,7 +48,7 @@ const binarySearch = (nums: number[], target: number): number => {
 }
 
 // 15/03/25 rep
-const binarySearch = (nums: number[], target: number): number => {
+const binarySearch8 = (nums: number[], target: number): number => {
     let left = 0;
     let right = nums.length - 1;
     
@@ -47,7 +62,7 @@ const binarySearch = (nums: number[], target: number): number => {
 }
 
 //10/03/25 rep
-const binarySearch = (nums: number[], target: number): number => {
+const binarySearch7 = (nums: number[], target: number): number => {
     let left = 0;
     let right = nums.length - 1;
 
@@ -71,7 +86,7 @@ const binarySearch = (nums: number[], target: number): number => {
 // space complexity O(1) 
 
 // 12/03/25 rep
-const binarySearch(nums: number[], target: number): number => {
+const binarySearch6 = (nums: number[], target: number): number => {
     let left = 0;
     let right = nums.length - 1;
 
@@ -86,7 +101,7 @@ const binarySearch(nums: number[], target: number): number => {
 }
 
 // 13/03/25
-const binarySearch = (nums: number[], target: number) => {
+const binarySearc5 = (nums: number[], target: number) => {
     let left = 0;
     let right = nums.length - 1;
 
@@ -102,22 +117,8 @@ const binarySearch = (nums: number[], target: number) => {
 // TC O(log n)
 // must be ordered input
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 11/03/rep
-const binarySearch = (nums: number[], target: number): number => {
+const binarySearch4 = (nums: number[], target: number): number => {
     let left = 0;
     let right = nums.length - 1;
 
@@ -136,7 +137,7 @@ const binarySearch = (nums: number[], target: number): number => {
 
 // 07/03/25 rep
 // - nums is expected to be ordered
-const binarySearch = (nums: number[], target: number): number => {
+const binarySearch3 = (nums: number[], target: number): number => {
     let leftIndex = 0;
     let rightIndex = nums.length -1;
 
@@ -177,7 +178,7 @@ const binarySearch = (nums: number[], target: number): number => {
 //       - this is bc we know the the middle index and everything to the right is not going to match
 //       - because the input is sorted
 // - if we have leftMostIndex being greater then rightMostIndex then we stop and exit with -1 bc we didnt find the value
-const binarySearch = (nums: number[], target: number): number => {
+const binarySearch2 = (nums: number[], target: number): number => {
     let left = 0;
     let right = nums.length - 1;
     while (left <= right) {
@@ -197,7 +198,7 @@ const binarySearch = (nums: number[], target: number): number => {
 
 // 05/03/25 rep
 // returns the index of where the target is or -1 if not found
-const binarySearch = (nums: number[], target: number): number => {
+const binarySearch1 = (nums: number[], target: number): number => {
     let leftMostIndex = 0;
     let rightMostIndex = nums.length -1;
 
