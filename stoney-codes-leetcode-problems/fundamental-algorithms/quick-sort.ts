@@ -40,6 +40,27 @@ console.log(quickSort(nums));
 // - Choose better pivots (median or three or random pivot)
 // - Use in-place partitioning (lomuto or hoare's partition scheme)
 
+// rep 21/03/25
+const quickSort2 = (arr: number[]): number[] => {
+    if (arr.length <= 1) return arr; // base case
+
+    const pivot = arr[arr.length - 1]; // end of the array
+    const left: number[] = [];
+    const right: number[] = [];
+
+    // loop through and asplit the array based on if it < or >= than pivot
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < pivot) {
+            left.push(arr[i]);
+        } else {
+            right.push(arr[i]);
+        }
+    }
+    // recursively do it again  pivot should be the middle
+    // then when we come back up the stack everythign gets stictched together in order
+    return [...quickSort2(left), pivot, ...quickSort2(right)];
+}
+
 // rep 17/03/25
 // Time complexity
 // - best / avg case: O(n log n) (balanced partitioning)
