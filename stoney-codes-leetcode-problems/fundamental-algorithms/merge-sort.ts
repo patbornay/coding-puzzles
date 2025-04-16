@@ -29,6 +29,28 @@ const merge = (left: number[], right: number[]) => {
 
 console.log(mergeSort([6, 3, 8, 5, 2]));
 
+// rep 10 12/4/24
+const mergeSort10 = (nums: number[]) => {
+    if (nums.length <= 1) return nums;
+
+    const mid = Math.floor(nums.length / 2);
+    const left: number[] = mergeSort10(nums.slice(0,mid));
+    const right: number[] = mergeSort10(nums.slice(mid));
+
+    return merge(left, right);
+}
+
+const merge10 = (left: number[], right: number[]): number[] => {
+    let results: number[] = [], i: number = 0, j: number = 0;
+
+    while (i < left.length && j < right.length) {
+        if (left[i] < right[j]) results.push(left[i++]);
+        else results.push(right[j++]);
+    }
+
+    return results.concat(left.slice(i).concat(right.slice(j)));
+} 
+
 // rep 8 31/03/25
 const mergeSort9 = (nums: number[]) => {
     if (nums.length <= 1) return nums;
