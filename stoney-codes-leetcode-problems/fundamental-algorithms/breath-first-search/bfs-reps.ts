@@ -44,13 +44,36 @@ const graph = {
 };
 
 // Run BFS from node 1
-console.log(bfs(graph, 1)); // Output: [1, 2, 3, 4, 5, 6, 7]
+console.log(bfs0(graph, 1)); // Output: [1, 2, 3, 4, 5, 6, 7]
 // visualisation
 //     1
 //    / \
 //   2   3
 //  /|   |\
 // 4 5   6 7
+
+// 28/03/25 rep 
+const bfs2 = (graph: Map<number, number[]>, start: number): number[] => {
+    const visited = new Set<number>();
+    const queue: number[] = [start];
+    const result: number[] = [];
+
+    while (queue.length > 0) {
+        const node = queue.shift()!;
+
+        if (!visited.has(node)) {
+            visited.add(node);
+            result.push(node);
+
+            for (const neighbor of graph[node]) {
+                if (!visited.has(neighbor)) {
+                    queue.push(neighbor);
+                }
+            }
+        }
+    }
+    return result;
+}
 
 // 17/03/25 rep
 const bfs1 = (graph: Map<number, number[]>, start: number): number[] => {
