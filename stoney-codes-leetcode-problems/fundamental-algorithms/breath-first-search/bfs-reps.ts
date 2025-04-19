@@ -52,6 +52,28 @@ console.log(bfs0(graph, 1)); // Output: [1, 2, 3, 4, 5, 6, 7]
 //  /|   |\
 // 4 5   6 7
 
+// 19/4/25
+const bf3 = (graph: Map<number, number[]>, start: number): number[] => {
+    const visited = new Set<number>();
+    const queue: number[] = [start];
+    const result: number[] = [];
+
+    while(queue.length > 0) {
+        const node = queue.shift()!;
+        if (!visited.has(node)) {
+            visited.add(node);
+            result.push(node);
+
+            for (const neighbor of graph[node]) {
+                if (!visited.has( neighbor)) {
+                    queue.push(neighbor);
+                }
+            }
+        }
+    }
+    return result;
+}
+
 // 28/03/25 rep 
 const bfs2 = (graph: Map<number, number[]>, start: number): number[] => {
     const visited = new Set<number>();
