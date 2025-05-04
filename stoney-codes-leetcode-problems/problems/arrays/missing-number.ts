@@ -29,7 +29,12 @@
 //   example: for iteration 5, check nums[5] === 5, otherwise return 5
 //   example: 0th iteration, check nums[0] === 0, otherwise return 0,
 //   so we save ourselves from crawling the array for each value.
+//   this would also catch duplicates
 
 const missingNums = (nums: number[]): number => {
-
+    const sortedNums: number[] = nums.sort(); // todo check this sorts correctly
+    for (let i = 0; i < nums.length; i++) {
+        if (sortedNums[i] !== i) return i;
+    }
+    return nums.length;
 }
