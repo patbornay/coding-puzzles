@@ -40,6 +40,19 @@ console.log(quickSort(nums));
 // - Choose better pivots (median or three or random pivot)
 // - Use in-place partitioning (lomuto or hoare's partition scheme)
 
+// rep 9 24/4/25
+const quickSort9 = (nums: number[]): number[] => {
+    if (nums.length <= 1) return nums;
+
+    const pivot = nums[nums.length -1];
+    const left: number[] = [], right: number[] = [];
+    for (let i = 0; i < nums.length - 1; i++) {
+        if (nums[i] < pivot) left.push(nums[i]);
+        else right.push(nums[i]);
+    }
+    return [...quickSort9(left), pivot, ...quickSort9(right)];
+}
+
 // rep 8 12/4/25
 const quickSort8 = (nums: number[]): number[] => {
     if (nums.length <= 1) return nums;
