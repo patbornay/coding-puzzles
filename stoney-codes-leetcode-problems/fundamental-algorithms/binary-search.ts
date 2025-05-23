@@ -19,6 +19,18 @@ function binarySearch(nums, target) {
     return -1;
 }
 
+// rep 21 30/4/25 
+const binarySearch21 = (nums: number[], target: number): number => {
+    let left = 0, right = nums.length - 1;
+    while (left < right) {
+        const mid = Math.floor((left + right) / 2);
+        if (nums[mid] === target) return target;
+        if (nums[mid] < target) left = mid + 1;
+        else right = mid - 1; 
+    }
+    return -1;
+}
+
 // rep 20 24/4/25
 const binarySearch20 = (nums: number[], target: number): number => {
     let left: number = 0, right: number = nums.length;
