@@ -19,6 +19,21 @@ function binarySearch(nums, target) {
     return -1;
 }
 
+// rep 22 23/5/25
+const binarySearch22 = (nums: number[], target: number): number => {
+    let left = 0, right = nums.length;
+    while (left < right) {
+        const mid = Math.floor((left + right) / 2);
+        if (target === nums[mid]) return mid;
+        if (target > nums[mid]) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+//  Time complexity
+//  best / avg case O(log n)
+//  - it splits the array into halves that means there will be log n operations untill left and right over laps
+
 // rep 21 30/4/25 
 const binarySearch21 = (nums: number[], target: number): number => {
     let left = 0, right = nums.length - 1;
