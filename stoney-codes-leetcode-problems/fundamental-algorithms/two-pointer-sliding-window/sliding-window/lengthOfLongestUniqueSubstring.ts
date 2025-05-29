@@ -17,6 +17,44 @@ const lengthOfLongestUniqueSubstring1 = (s: string): number => {
 }
 console.log(lengthOfLongestUniqueSubstring1('abcabcbb')); // output: 3 ('abc')
 
+// rep 5 25/5/25
+const lengOfLongestUniqSubStr5 = (s: string): number => {
+    const charSet = new Set<string>(); // Store unique characters 
+    let left: number = 0, maxLength = 0; // Left pointer and max length tracker 
+
+    for (let right =0; right < s.length; right++) { // Expand the unique substring window
+        // removing unique 
+        while (charSet.has(s[right])) { // if duplicate is found 
+            charSet.delete(s[left]); // remove the left most character 
+            left++; // move left pointer forward
+        }
+        charSet.add(s[right]); // add the current character 
+        // update max length
+        maxLength = Math.max(maxLength, right - left + 1);
+        // the reason we dont use charSet.length for maxLength calculation
+        // because it can be temporarily incorrect when left moves
+    }
+    return maxLength; // return the longest length found
+}
+
+// rep 4 25/5/25
+const lengOfLongestUniqSubStr4 = (s: string): number => {
+    const charSet = new Set<string>(); // Store unique characters
+    let left = 0, maxLength = 0;
+
+    for (let right = 0; right < s.length; right++) {
+        while (charSet.has(s[right])) {
+            charSet.delete(s[left]);
+            left++;
+            // basically delete the letters we just added to charSet
+        }
+        charSet.add(s[right]);
+        // update max length
+        maxLength = Math.max(maxLength, right - left + 1);
+    }
+    return maxLength;
+}
+
 // rep 3 03/03/25
 const lengOfLongestUniqSubStr3 = (s: string): number => {
     const charSet = new Set<string>(); // Store unique characters 
