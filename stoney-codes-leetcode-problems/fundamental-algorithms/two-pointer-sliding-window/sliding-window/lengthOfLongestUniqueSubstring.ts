@@ -17,6 +17,22 @@ const lengthOfLongestUniqueSubstring1 = (s: string): number => {
 }
 console.log(lengthOfLongestUniqueSubstring1('abcabcbb')); // output: 3 ('abc')
 
+// rep 6 230/5/25
+const lengOfLongestUniqSubStr6 = (s: string): number => {
+    const charSet = new Set<string>();
+    let left: number = 0, maxLength = 0;
+
+    for (let right = 0; right < s.length; right++) {
+        while (charSet.has(s[right])) {
+            charSet.delete(s[left]);
+            left++;
+        }
+        charSet.add(s[right]);
+        maxLength = Math.max(maxLength, right - left + 1);
+    }
+    return maxLength;
+}
+
 // rep 5 25/5/25
 const lengOfLongestUniqSubStr5 = (s: string): number => {
     const charSet = new Set<string>(); // Store unique characters 
