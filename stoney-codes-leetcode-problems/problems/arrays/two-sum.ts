@@ -29,7 +29,7 @@
 // optimised solution 
 function twoSum(nums: number[], target: number): number[] {
     let numsMap: Map<number, number> = new Map();
-    for (let i = 0; i < nums.length; ++i) {
+    for (let i = 0; i < nums.length; i++) {
         const complement = target - nums[i];
         if (numsMap[complement] !== undefined) {
             return [numsMap[complement], i];
@@ -39,7 +39,38 @@ function twoSum(nums: number[], target: number): number[] {
     return [];
 }
 
-// rep 23/5/25
+// rep 3 03/06/25
+function twoSum3(nums: number[], target: number): number[] {
+    // setup a dictionary where the key is the number and the value is the index 
+    let numsMap: Map<number, number> = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+
+        // if map has the necessary complement to make target return
+        if (numsMap[complement] !== undefined) {
+            return [numsMap[complement], i];
+        }
+
+        // otherwise add this number to the map
+        numsMap[nums[i]] = i;
+    }
+    return [];
+}
+
+// rep 2 31/5/25
+function twoSum2(nums: number[], target: number): number[] {
+    let numsMap: Map<number, number> = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        if (numsMap[complement] !== undefined) {
+            return [numsMap[complement], i];
+        }
+        numsMap[nums[i]] = i;
+    }
+    return [];
+}
+
+// rep 1 23/5/25
 function twoSum1(nums: number[], target: number): number[] {
     // setup a map that has a num in nums as the key and its index as the value
     let numsMap: Map<number, number> = new Map();
