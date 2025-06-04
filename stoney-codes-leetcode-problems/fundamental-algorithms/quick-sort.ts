@@ -40,6 +40,58 @@ console.log(quickSort(nums));
 // - Choose better pivots (median or three or random pivot)
 // - Use in-place partitioning (lomuto or hoare's partition scheme)
 
+// rep 12 4/6/25
+const quickSort12 = (nums: number[]): number[] => {
+    // base case
+    if (nums.length <= 1) return nums;
+
+    // left and right lists
+    const left: number[] = [], right: number[] = [];
+    // some arbitrary pivot point
+    let pivot: number = nums[nums.length - 1];
+
+    // move items into either < or >=, (left and right lists respectively)
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] < pivot) left.push(nums[i]);
+        else right.push(nums[i]);
+    }
+
+    // recursive call
+    return [...quickSort12(left), pivot, ...quickSort12(right)];
+}
+
+
+// rep 11 23/5/25
+const quickSort11 = (nums: number[]): number[] => {
+    if (nums.length <= 1) return nums;
+    const left: number[] = [], right: number[] = [];
+    let pivot: number = nums[nums.length - 1];
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] < pivot) left.push(nums[i]);
+        else right.push(nums[i]);
+    }
+    return [...quickSort11(left), pivot, ...quickSort11(right)];
+}
+
+// rep 10 23/5/25
+const quickSort10 = (nums: number[]): number[] => {
+    if (nums.length <= 1) return nums;
+    const pivot = nums[nums.length -1];
+    const left: number[] = [], right: number[] = [];
+    for (let i = 0; i < nums.length - 1; i++) {
+        if (nums[i] < pivot) left.push(nums[i]);
+        else right.push(nums[i]);
+    }
+    return [...quickSort10(left), pivot, ...quickSort10(right)];
+}
+//  Time complexity
+//  avg case / best case O(n log n)
+//  - each level of recursion splits the array into two laves
+//  - there are log n levels of recursion (like binary tree height)
+//  - at each level, you scan all n elements to split them into left and right 
+//  total time O(n) per level * log n levels = O(n log n)
+
+
 // rep 9 24/4/25
 const quickSort9 = (nums: number[]): number[] => {
     if (nums.length <= 1) return nums;
