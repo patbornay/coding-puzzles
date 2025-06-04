@@ -66,3 +66,31 @@ function containsDuplicateOptimal(nums: number[]): boolean {
 
     return false;
 };
+
+const containsDupelicate3 = (nums: number[]): boolean => {
+    // instant access bc hashing
+    const numsFrequency = new Map<number, number>();
+
+    // iterate once over nums
+    for (let i = 0; i < nums.length; i++) {
+        if (numsFrequency.has(nums[i])) {
+            return true;
+        } else {
+            numsFrequency.set(nums[i], 1);
+        }
+    }
+    return false;
+}
+
+const containsDupelicate2 = (nums: number[]): boolean => {
+    const numsFrequency = new Map<number, number>();
+
+    for (let i = 0; i < nums.length; i++) {
+        if (numsFrequency.has(nums[i])) {
+            return true;
+        } else {
+            numsFrequency.set(nums[i], 1);
+        }
+    }
+    return false;
+} 
