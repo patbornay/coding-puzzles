@@ -39,6 +39,36 @@ function twoSum(nums: number[], target: number): number[] {
   return [];
 }
 
+// rep 5 7/6/25
+const twoSum5 = (nums: number[], target: number): number[] => {
+  let numsMap: Map<number, number> = new Map();
+  
+  // iterate nums.length times over nums
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i]; // identify the remainder needed
+
+    if (numsMap[complement] !== undefined) {
+      return [numsMap[complement], i]; // if found return the index
+    }
+    numsMap[nums[i]] = i; // otherwise add to map
+  }
+  return []; // if no pair is found
+}
+
+// rep 4 4/6/25
+const twoSum4 = (nums: number[], target: number): number[] => {
+  let numsMap: Map<number, number> = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
+
+    if (numsMap[complement] !== undefined) {
+      return [numsMap[complement], i];
+    }
+    numsMap[complement] = i;
+  }
+  return [];
+}
+
 // rep 3 03/06/25
 function twoSum3(nums: number[], target: number): number[] {
   // setup a dictionary where the key is the number and the value is the index
