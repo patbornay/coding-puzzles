@@ -46,6 +46,38 @@ function spiralOrder(matrix: number[][]): number[] {
   return result;
 }
 
+const spiralOrder2 = (matrix: number[][]): number[] => {
+  const result: number[] = [];
+
+  // iterative approach over recursive call stack approach
+  while (matrix) {
+    // 1 get the first row 
+    const firstList = matrix.shift();
+    if (firstList) result.push(...firstList);
+    // 2 get last element of reamaining lists
+    if (matrix && matrix[0]) {
+      for (const row of matrix) {
+        if (row != undefined && row.length > 0) {
+          const lastEl = row.pop();
+          if (lastEl) result.push(lastEl);
+        }
+      }
+    }
+    // 3 add reverse of last list 
+    if (matrix) {
+      const lastRowReverse = matrix.pop()?.reverse();
+      if (lastRowReverse) result.push(...lastRowReverse);
+    }
+    // 4 add first el of remaining lists
+    if (matrix) {
+      for (const row of matrix) {
+        const firstEl = row.shift();
+        if (firstEl) result.push(firstEl);
+      }
+    }
+  }
+}
+
 const spiralOrder1 = (matrix: number[][]): number[] => {
   const result: number[] = [];
   // iterative approach over recursive call stack approach 
