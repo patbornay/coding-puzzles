@@ -16,4 +16,19 @@
 // Sort nums (n log n operations), then iterate each value should be equal to the iterator + 1 (bc of zero based indexing)
 // continually add to result array for every time iterator + 1 is not equal to nums[iterator] (n operations)
 
-//
+const findAllMissingNumbers = (nums: number[]): number[] => {
+  // why a set? 
+  // when we are trying to find items and duplicates pose some 
+  // redundancy in the process then we should think about using a set
+  let set = new Set<number>(nums), result: number[] = [];
+
+  // lets count from 1 to nums.len and bc of the set (hash table) its constant time lookup
+  // when we dont find it, we add to result
+  for (let i: number = 1; i < nums.length + 1; i++) {
+    if (!set.has(i)) {
+      result.push(i);
+    }
+  }
+  return result;
+
+}
