@@ -46,6 +46,64 @@ function spiralOrder(matrix: number[][]): number[] {
   return result;
 }
 
+const spiralOrder4 = (matrix: number[][]): number[] => {
+  const result: number[] = [];
+  while (matrix) {
+    // 1 get the first row
+    const firstList = matrix.shift();
+    if (firstList) result.push(...firstList);
+    // 2 append the last element of all lists in the matrix
+    if (matrix && matrix[0]) {
+      for (const row of matrix) {
+        if (row !== undefined && row.length > 0){
+          const lastElement = row.pop();
+        }
+      }
+    }
+    // 3 get the last row in reverse
+    const lastRowReverse = matrix.pop()?.reverse();
+    if (lastRowReverse) result.push(...lastRowReverse);
+    // 4 get get first el of each list 
+    if (matrix) {
+      for( const row of matrix) {
+        const firstEl = row.shift()
+        if (firstEl) result.push(firstEl)
+      }
+    }
+  }
+    return result;
+}
+
+const spiralOrder3 = (matrix: number[][]): number[] => {
+  const result: number[] = [];
+
+  // iterative approach over recusive call stack approach
+  while (matrix) {
+    // 1 get the first row 
+    const firstList = matrix.shift();
+    if (firstList) result.push(...firstList);
+    // 2 append the last element of all lists in the matrix
+    if (matrix && matrix[0]) {
+      for (const row of matrix) {
+        if (row !== undefined && row.length > 0) {
+          const lastElement = row.pop();
+        }
+      }
+    }
+    // 3 get the last list in reverse 
+    const lastRowReverse = matrix.pop()?.reverse();
+    if (lastRowReverse) result.push(...lastRowReverse);
+    // 4 get the first element of each list
+    if (matrix) {
+      for (const row of matrix) {
+        const firstElement = row.shift();
+        if (firstElement) result.push(firstElement);
+      }
+    }
+  }
+  return result;
+}
+
 const spiralOrder2 = (matrix: number[][]): number[] => {
   const result: number[] = [];
 
@@ -76,6 +134,7 @@ const spiralOrder2 = (matrix: number[][]): number[] => {
       }
     }
   }
+  return result;
 }
 
 const spiralOrder1 = (matrix: number[][]): number[] => {
