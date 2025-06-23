@@ -32,6 +32,36 @@
 // well thats because the js indexOf(value) will stop when it first finds a match, so duplicates will end up on the earliest index always.
 
 const smallerNumbersThanCurrent = (nums: number[]): number[] => {
-    const sorted = [...nums].sort((a,b) => a - b);
+    const sorted = nums.sort((a,b) => a - b);
+    return nums.map((v) => sorted.indexOf(v));
+} 
+
+// rep 3 24/6/25
+
+const smallerNumbersThanCurrent3 = (nums: number[]): number[] => {
+    const sorted = nums.sort((a,b) => a - b);
+    // return an array of index of all nums, dupes will all have the 'same' index
+    return nums.map((v) => sorted.indexOf(v));
+}
+
+// rep 2 4/6/25
+
+const smallerNumbersThanCurrent2 = (nums: number[]): number[] => {
+    const sorted = nums.sort((a,b) => a - b);
+    return nums.map((v) => sorted.indexOf(v));
+}
+
+// rep 23/5/25
+
+// original solution
+// iterate over nums, for each num iterate over nums again counting if num is > the comparision num
+// skip the index that is the same as the current num's index
+
+// optimised solution
+// sort the array nlogn then iterate over then for each number (n) return the index of that value 
+// doesnt matter if theyre duplicates 
+
+const smallerNumbersThanCurrent1 = (nums: number[]): number[] => {
+    const sorted = nums.sort((a,b) => a - b);
     return nums.map((v) => sorted.indexOf(v));
 } 
