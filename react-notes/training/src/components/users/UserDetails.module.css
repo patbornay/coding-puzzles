@@ -1,0 +1,29 @@
+.details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.details__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.username { 
+  opacity: 75%;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row;
+  padding-right: var(--spacing-300);
+}
+
+.star {
+  height: 20px;
+  width: 20px;
+}
+
+.skills {
+  padding-top: var(--spacing-300);
+}

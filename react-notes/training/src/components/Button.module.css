@@ -1,0 +1,26 @@
+.button {
+  padding: var(--spacing-200);
+  border-radius: var(--radius-100);
+  border-color: var(--primary-0);
+  border-width: 0px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.primary {
+  background-color: var(--primary-0);
+}
+
+.secondary {
+  background-color: var(--neutral-800);
+  color: var(--primary-0);
+  border-color: var(--primary-0);
+  border-style: solid;
+  border-width: 1px;
+}
+
+.tertiary {
+  background-color: var(--neutral-100);
+}
