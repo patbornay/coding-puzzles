@@ -16,8 +16,9 @@ export const UserDetails = ({ user }: UserDetailsProps) => {
         <h2 className={styles["display-name"]}>{user.displayName}</h2>
         <h2 className={styles["username"]}>@{user.username}</h2>
       </div>
-      <div className={styles["details__row"]}>
+      <div className={styles["details__rating-row"]}>
         <StarRating stars={Math.ceil(user.rating)} />
+        <div>{user.rating}</div>
         <div className={styles["country"]}>{user.country.code}</div>
       </div>
       <div className={styles["tagline"]}>
@@ -46,7 +47,6 @@ function StarRating({ stars }: { stars: number }) {
           src={"/src/assets/star.svg"}
         />
       ))}
-      {stars}
     </div>
   );
 }

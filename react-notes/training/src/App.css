@@ -42,6 +42,8 @@
   --primary-400: #C1EDBB;
   --primary-600: #E0F6DD;
 
+  --primary-filter-0: brightness(0) saturate(100%) invert(80%) sepia(95%) saturate(305%) hue-rotate(47deg) brightness(94%) contrast(80%);
+
   --radius-100: 4px;
 }
 

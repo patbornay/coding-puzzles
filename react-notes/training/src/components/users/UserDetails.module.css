@@ -17,15 +17,22 @@
   opacity: 75%;
 }
 
+.details__rating-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-100);
+  line-height: 1.4rem;
+}
+
 .rating {
   display: flex;
   flex-direction: row;
-  padding-right: var(--spacing-300);
 }
 
 .star {
   height: 20px;
   width: 20px;
+  filter: var(--primary-filter-0); /* red filter */
 }
 
 .tagline {
