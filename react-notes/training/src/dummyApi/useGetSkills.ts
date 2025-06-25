@@ -15,7 +15,6 @@ export const useGetSkills = ({ids}: {ids: number[]}) => {
     setLoading(true);
     try {
       const response = await getSkills(ids);
-      console.log('skills', response);
       setSkills(response);
       setLoading(false);
     } catch (err) {
