@@ -1,3 +1,9 @@
 .filters {
+
   width: 25vw;
+  border-style: solid;
+  border-radius: var(--spacing-100);
+  border-color: var(--neutral-500);
+  border-width: 1px;
+  padding: var(--spacing-200);
 }
