@@ -6,10 +6,9 @@
   width: 100%;
   max-height: 100%;
   border-style: solid;
-  border-color: var(--neutral-300);
+  border-color: var(--neutral-500);
   border-width: 1px;
   border-radius: 4px;
-  overflow-y: scroll; /** adds white space on the right?**/
 }
 
 .users-filters {
@@ -18,6 +17,13 @@
   width: 100%;
   height: 5vh;
   justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-300);
+  box-shadow: var(--box-shadow);
+}
+
+.users-filters,p {
+  margin: 0;
 }
 
 .users-pagination {
@@ -29,6 +35,14 @@
 .users-sort {
   display: flex;
   flex-direction: row;
+}
+
+.sort-input {
+  height: 0.4x;
+}
+
+.users-container {
+  overflow-y: scroll; /** adds white space on the right?**/
 }
 
 .user {

@@ -15,7 +15,7 @@ export const Users = ({ users }: UsersProps) => {
         </div>
         <div className={styles["users-sort"]}>
           <p>Sort by: </p>
-          <input />
+          <input className={styles["sort-input"]} />
         </div>
       </div>
       <div className={styles["users-container"]}>
