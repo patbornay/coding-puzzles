@@ -1,4 +1,4 @@
-// On a 2D plane, there are n points with integer coordinates points [i] = [xi, yi]. 
+// On a 2D plane, there are n points with integer coordinates points [i] = [xi, yi].
 // Return the minimum time in seconds to visit all the points in the order given by points.
 //     You can move according to these rules:
 //     • In 1 second, you can either:
@@ -9,15 +9,14 @@
 //     • You are allowed to pass through points that appear later in the order, but these do not count as visits.
 // Input: points = [[1,1],[3,4],[-1,0]]
 // Output: 7
-// Explanation: One optimal path is [1,1] -> [2,2] -> [3,3] -> [3,4] -> [2,3] -> [1,2] -> [0,1] -> [-1,0]   
-// Time from [1,1] to [3,4] = 3 seconds 
+// Explanation: One optimal path is [1,1] -> [2,2] -> [3,3] -> [3,4] -> [2,3] -> [1,2] -> [0,1] -> [-1,0]
+// Time from [1,1] to [3,4] = 3 seconds
 // Time from [3,4] to [-1,0] = 4 seconds
 // Total time = 7 seconds
 // Example 2:
 
 // Input: points = [[3,2],[-2,2]]
 // Output: 5
- 
 
 // Constraints:
 
@@ -29,3 +28,36 @@
 // solution
 // https://leetcode.com/problems/minimum-time-visiting-all-points/solutions/6101204/video-give-me-5-minutes-how-we-think-about-a-solution/
 
+function minTimeToVisitAllPoints(points: number[][]): number {
+  // Add input validation
+    if (!points || points.length === 0) {
+        return 0;
+    }
+    
+    let res = 0;
+    let lastValidPoint: number[] | null = null;
+
+    for (let i = 0; i < points.length; i++) {
+        const currentPoint = points[i];
+        
+        // Skip invalid points
+        if (!currentPoint || currentPoint.length < 2 || 
+            typeof currentPoint[0] !== 'number' || typeof currentPoint[1] !== 'number') {
+            continue;
+        }
+        
+        // If we have a previous valid point, calculate distance
+        // Ill need to set some pen and paper time to really nail this part down
+        if (lastValidPoint !== null) {
+            res += Math.max(
+                Math.abs(currentPoint[0] - lastValidPoint[0]),
+                Math.abs(currentPoint[1] - lastValidPoint[1])
+            );
+        }
+        
+        // Update last valid point
+        lastValidPoint = currentPoint;
+    }
+
+    return res;
+}
