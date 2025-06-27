@@ -13,11 +13,11 @@ export const Filters = () => {
         </div>
         <div className={styles["hourly-rate__min-max-controls"]}>
           <div>
-            <input />
+            <input placeholder="$0" />
           </div>
           <div>to</div>
           <div>
-            <input />
+            <input placeholder="$80+"/>
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@ export const Filters = () => {
             <a href="">Clear</a>
           </p>
         </div>
-        <input />
+        <input placeholder="search countries" />
       </div>
     </div>
   );

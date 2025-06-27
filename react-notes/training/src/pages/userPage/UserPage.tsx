@@ -7,7 +7,9 @@ export const UserPage = () => {
   const { users, loading, error } = useGetUsers();
   return (
     <div className={styles["user-page"]}>
-      <div className={styles["search"]}>This is search</div>
+      <div className={styles["search"]}>
+        <input placeholder="search for freelancers" />
+      </div>
       <div className={styles["filters-users-container"]}>
         <Filters />
         <Users users={users ?? []}/>
