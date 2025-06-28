@@ -39,6 +39,21 @@ function twoSum(nums: number[], target: number): number[] {
   return [];
 }
 
+// rep 7 23/6/25
+const twoSum7 = (nums: number[], target: number): number[] => {
+  const numsMap: Map<number, number> = new Map();
+
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
+
+    if (numsMap[complement] !== undefined) {
+      return [numsMap[complement], i]
+    }
+    numsMap[nums[i]] = i;
+  }
+  return [];
+}
+
 // rep 6 11/6/25 
 const twoSum6 = (nums: number[], target: number): number[] => {
   // map of complments 
