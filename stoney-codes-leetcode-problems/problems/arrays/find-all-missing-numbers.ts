@@ -24,6 +24,7 @@ const findAllMissingNumbers = (nums: number[]): number[] => {
 
   // lets count from 1 to nums.len and bc of the set (hash table) its constant time lookup
   // when we dont find it, we add to result
+  // time complexity - iterating over 
   for (let i: number = 1; i < nums.length + 1; i++) {
     if (!set.has(i)) {
       result.push(i);
@@ -31,4 +32,17 @@ const findAllMissingNumbers = (nums: number[]): number[] => {
   }
   return result;
 
+}
+
+const findAllMissingNumbers1 = (nums: number[]): number[] => {
+  let set = new Set<number>(nums), result: number[] = [];
+
+  // count 1 to nums.len and bc of the set (hash table) its constant time lookup
+  // push i if i doenst exist
+  for (let i: number = 1; i < nums.length + 1; i++) {
+    if (!set.has(i)) {
+      result.push(i);
+    }
+  }
+  return result;
 }
