@@ -67,6 +67,29 @@ function containsDuplicateOptimal(nums: number[]): boolean {
     return false;
 };
 
+const containsDuplicateOptimal1 = (nums: number[]): boolean => {
+    const numsFrequency = new Map<number, number>(); // track numbers that exist
+
+    for (let i = 0; i < nums.length; i++) {
+        if (numsFrequency.has(nums[i])) { // .has() and .set() faster
+            return true; // end immediately when dupe is found
+        } else {
+            numsFrequency.set(nums[i], 1);
+        }
+    }
+    return false;
+}
+
+const containsDupelicate5 = (nums: number[]): boolean => {
+    const numsFreq = new Map<number, number>();
+
+    for (let i = 0; i < nums.length; i++) {
+        if (numsFreq.has(nums[i])) return true;
+        else numsFreq.set(nums[i], 1);
+    }
+    return false;
+}
+
 // rep 5/6/25
 const containsDupelicate4 = (nums: number[]): boolean => {
     // freq count map
