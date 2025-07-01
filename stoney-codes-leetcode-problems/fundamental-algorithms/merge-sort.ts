@@ -29,6 +29,47 @@ const merge = (left: number[], right: number[]) => {
 
 console.log(mergeSort([6, 3, 8, 5, 2]));
 
+// rep 14 31/5/25
+const mergeSort14 = (nums: number[]): number[] => {
+    if (nums.length <= 1) return nums;
+
+    const mid = Math.floor(nums.length / 2);
+    const left = mergeSort14(nums.slice(0,mid));
+    const right = mergeSort14(nums.slice(mid));
+
+    return merge14(left, right);
+}
+
+const merge14 = (left: number[], right: number[]) => {
+    const result: number[] = [];
+    let i = 0, j = 0;
+    while (i < left.length && j < right.length) {
+        if (left[i] < right[j]) result.push(left[i++]);
+        else result.push(right[j++]);
+    }
+    return result.concat(left.slice(i).concat(right.slice(j)));
+}
+
+// rep 13 30/5/25
+const mergeSort13 = (nums: number[]): number[] => {
+    if (nums.length <= 1) return nums;
+
+    const mid = Math.floor(nums.length / 2);
+    const left = mergeSort13(nums.slice(0,mid));
+    const right = mergeSort12(nums.slice(mid));
+    return merge13(left, right);
+}
+
+const merge13 = (left: number[], right: number[]) => {
+    const result: number[] = []
+    let i = 0, j = 0;
+    while (i < left.length && j < right.length) {
+        if (left[i] < right[j]) result.push(left[i++]);
+        else result.push(right[j++])
+    }
+    return result.concat(left.slice(i).concat(right.slice(j)));
+}
+
 // rep 12 1/5/25
 const mergeSort12 = (nums: number[]): number[] => {
     // base case
