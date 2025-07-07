@@ -17,7 +17,26 @@ const lengthOfLongestUniqueSubstring1 = (s: string): number => {
 }
 console.log(lengthOfLongestUniqueSubstring1('abcabcbb')); // output: 3 ('abc')
 
-// rep 6 230/5/25
+// rep 7 31/5/25
+const lengOfLongestUniqSubStr7 = (s: string): number => {
+    const charSet = new Set<string>();
+    let left: number = 0, maxLength = 0;
+
+    for (let right = 0; right < s.length; right++) {
+        while (charSet.has(s[right])) {
+            charSet.delete(s[left]);
+            left++;
+        }
+        charSet.add(s[right]);
+        maxLength = Math.max(maxLength, right - left + 1);
+    }
+    return maxLength;
+}
+// time complexity is n interations for n string + m interations over charSet when removing an existing string because it is not unique
+// - worst case, a unique string of x length, then dupe then a unqiue string of x + 1-y and repeat causing charSet deletions repeatedly
+// space complexity is 
+
+// rep 6 30/5/25
 const lengOfLongestUniqSubStr6 = (s: string): number => {
     const charSet = new Set<string>();
     let left: number = 0, maxLength = 0;
