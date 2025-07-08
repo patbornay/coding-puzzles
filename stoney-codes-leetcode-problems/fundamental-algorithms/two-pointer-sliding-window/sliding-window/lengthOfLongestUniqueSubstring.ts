@@ -17,6 +17,28 @@ const lengthOfLongestUniqueSubstring1 = (s: string): number => {
 }
 console.log(lengthOfLongestUniqueSubstring1('abcabcbb')); // output: 3 ('abc')
 
+// rep 8 8/7/25
+const lengOfLongestUniqSubStr8 = (s: string): number => {
+    const charSet = new Set<string>(); // Store unique chars
+    let left: number = 0, maxLength = 0; // Left pointer and max leng tracker
+
+    for (let right = 0; right < s.length; right++) { // Expand the unique sub str window
+        // while a duplicate exists, stop iterating through str w right pointer,
+        // use left pointer to remove chars starting from where the unique
+        // sub str began untill we meet where the right pointer is and start again from there 
+        while (charSet.has(s[right])) {
+            charSet.delete(s[left]);
+            left++;
+        }
+        // add the current character 
+        charSet.add(s[right]);
+        // re-calculate max length as either the prev maxLength found 
+        // or the current uni sub str we are building
+        maxLength = Math.max(maxLength, right - left + 1);
+    }
+    return maxLength;
+}
+
 // rep 7 31/5/25
 const lengOfLongestUniqSubStr7 = (s: string): number => {
     const charSet = new Set<string>();
