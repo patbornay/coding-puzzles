@@ -50,3 +50,13 @@ async function example() {
 
   console.log(result1, result2);
 }
+
+// Reps go here 
+/**
+ * Write a function that: 
+ * - Provides a method to getProfile which makes an API call 
+ * to https://jsonplaceholder.typicode.com/users/1
+ * - prevents calling while a call is inProgress
+ * - contains a cache to store already fetched data
+ * - use the async await pattern
+ */
