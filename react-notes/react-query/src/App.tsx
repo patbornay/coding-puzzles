@@ -1,28 +1,27 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { UserPage } from "./pages/UserPage";
+import { UserDefaultExample } from "./pages/UserDefaultExample";
+import { ModalButton } from "./components/ModalButton";
+import { UserStaleTimeExample } from "./pages/UserStaleTimeExample";
+import { ErrorBoundaryExample } from "./pages/ErrorBoundaryExample";
 
 const queryClient = new QueryClient();
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <UserPage />
+        <ModalButton name="default user query">
+          <UserDefaultExample />
+        </ModalButton>
+        <ModalButton name="stale time user query">
+          <UserStaleTimeExample />
+        </ModalButton>
+        <ModalButton name="error boundary example">
+          <ErrorBoundaryExample />
+        </ModalButton>
       </QueryClientProvider>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
     </>
   );
 }
