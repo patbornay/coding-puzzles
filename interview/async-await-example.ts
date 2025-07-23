@@ -60,3 +60,38 @@ async function example() {
  * - contains a cache to store already fetched data
  * - use the async await pattern
  */
+
+
+export const profileProvider1 = () => {
+  let inProgress: any = null;
+  let cachedData: any = null;
+
+  return {
+    async getProfile() {
+      if (cachedData) return { data: cachedData };
+      if (inProgress) return inProgress;
+
+      inProgress = async () => {
+        try {
+          const response = await fetch("some URL");
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+
+          const data = await response.json();
+          cachedData = data;
+          return { data };
+        } catch (error) {
+          return { error };
+        } finally {
+          inProgress = null;
+        };
+      };
+      return inProgress;
+    },
+  };
+};
+
+const profileService1 = profileProvider1();
+const promise11 = profileService1.getProfile();
