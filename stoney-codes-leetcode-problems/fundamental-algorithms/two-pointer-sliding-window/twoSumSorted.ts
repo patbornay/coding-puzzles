@@ -1,3 +1,21 @@
+const twoSumSorted3 = (nums: number[], target: number): number[] => {
+    let left = 0, right = nums.length - 1;
+
+    while (left < right) {
+        const sum = nums[left] + nums[right];
+        if (sum === target) return [nums[left], nums[right]];
+        if (sum < target) left++;
+        else right--;
+    }
+    return [];
+    // a sub-optimal case
+    // [1,1,1,1,1,2,9] target 11
+    // the sum first will be 1 + 9 = 10
+    // and will keep incrementing left untill it reacts 2 + 9 = 11
+    // maybe a check to see if left value is unique i.e. sum changes
+    // like an early break point
+}
+
 const twoSumSorted2 = (nums: number[], target: number): number[] => {
     let left = 0, right = nums.length -1 ;
 
