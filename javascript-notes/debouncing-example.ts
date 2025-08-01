@@ -44,6 +44,16 @@ const debounce1 = <T extends AnyFunction>(func: T, delayMs: number): DebouncedFu
 // why we use func.apply(this, args) instead of func(args)?
 // this is more if we say had an object at the global level, the debounced function 
 // we get back would no longer be able to access that global object
+/**
+The this binding in goodDebounce is telling JavaScript:
+"When you finally call the original function, pretend it was called by the same object that called the debounced function."
+
+Here's the step-by-step:
+- Capture the context: const context = this;
+    "Remember who called me right now"
+- Use the context later: func.apply(context, args)
+    "Call the original function, but set its this to be the captured context"
+ */
 const user = {
   name: 'Alice',
   age: 30,
@@ -78,12 +88,9 @@ const goodDebounce = (func, delay) => {
   };
 };
 
-// Test the difference
-console.log('=== Testing BAD debounce ===');
-// we assign the user.greet method as debounced with 100ms to user.badGreet
+// Fails to find value because badDebounce buiilder isn't given any context
 const badDebouncedGreet = badDebounce(user.greet, 100);
 user.badGreet = badDebouncedGreet;
-
 try {
   user.badGreet('Nice to meet you!');
   // This will log: "Hi, I'm undefined and I'm undefined years old. Nice to meet you!"
@@ -92,14 +99,18 @@ try {
   console.log('Error:', error.message);
 }
 
-console.log('\n=== Testing GOOD debounce ===');
+// Avoiding using outside definied closure
+const badDebouncedGreet2 = badDebounce((message) => {console.log(`Hi! ${user.name} ${message}`)}, 100);
+user.badGreet = badDebouncedGreet2;
+try {
+  user.badGreet('Nice to meet you!');
+} catch (error) {
+  console.log('Error:', error.message);
+}
+
+// Setup with this context correctly
 const goodDebouncedGreet = goodDebounce(user.greet, 100);
 user.goodGreet = goodDebouncedGreet;
-
 setTimeout(() => {
   user.goodGreet('Nice to meet you!');
 }, 200);
-/** 
- * if the function's logic depends on this referring to a specific object, 
- * it will break or behave unexpectedly when this becomes undefined.
- */
