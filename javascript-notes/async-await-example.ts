@@ -1,3 +1,18 @@
+/**
+ * The key rule: Await when you need the result, don't await when you don't
+✅ DO await when:
+You need the result to continue
+You want to handle errors properly
+You need things to happen in sequence
+You're returning the result from your function
+
+✅ DON'T await when:
+You want background/parallel execution
+You're doing "fire and forget" operations
+You want to start multiple things simultaneously
+You're passing the promise to someone else
+*/
+
 export const profileProvider = () => {
   let inProgress: any = null;
   let cachedData: any = null;
@@ -39,9 +54,9 @@ export const profileProvider = () => {
 // Usage remains the same:
 const profileService = profileProvider();
 
-const promise1 = profileService.getProfile();
-const promise2 = profileService.getProfile();
-const promise3 = profileService.getProfile();
+const promise1 = await profileService.getProfile();
+const promise12 = await profileService.getProfile();
+const promise13 = await profileService.getProfile();
 
 // You can now use these promises with async/await as well:
 async function example() {
@@ -94,4 +109,44 @@ export const profileProvider1 = () => {
 };
 
 const profileService1 = profileProvider1();
-const promise11 = profileService1.getProfile();
+const promise11 = await profileService1.getProfile();
+
+/**
+ * - block multiple calls 
+ * - cache results
+ * - provide a function to fetch api data 
+ */
+export const profileProvider2 = () => {
+  let inProgress: any = null;
+  let cachedData: any = null;
+
+  // object which contains a getProfile and clear cache method
+  return {
+    clearCache: () => {},
+    async getProfile() {
+      if (cachedData) return {data: cachedData};
+      if (inProgress) return inProgress;
+
+      inProgress = async () => {
+        try {
+          const response = await fetch("some URL");
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+          // save to cache and return data if successful
+          const data = await response.json();
+          cachedData = data;
+          return {data}
+        } catch (error) {
+          return {error};
+        } finally {
+          inProgress = null;
+        };
+      };
+      return inProgress;
+    }
+  }
+}
+
+const service2 = profileProvider2();
+const promise2 = await service2.getProfile();
