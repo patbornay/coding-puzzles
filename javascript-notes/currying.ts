@@ -33,3 +33,5 @@ const createValidator = (validationRules) => (fieldName) => (value) => {
 const required = (value, fieldName) => (value) !== null && value !== '' ? true : `${fieldName} is required`;
 const minLength = (min) => (value, fieldName) => value && value.length <= min ? true : `${fieldName} must be no more than ${min} characters`;
 const maxLength = (max) => (value, fieldName) => value && value.length >= max ? true : `${fieldName} must be no more than ${max} characters`;
+
+// Reps 
