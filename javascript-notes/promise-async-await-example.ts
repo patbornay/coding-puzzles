@@ -183,3 +183,32 @@ export const profileProvider3 = () => {
 
 const profileService3 = profileProvider3();
 const results3 = await profileService3.getProfile();
+
+export const profileProvider4 = () => {
+  let inProgress: any = null;
+  let cachedData: any = null;
+
+  return {
+    async getProfile() {
+      if (cachedData) return {data: cachedData};
+      if (inProgress) return inProgress;
+
+      inProgress = async () => {
+        try {
+          const response = await fetch("some URL");
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+          }
+          const data = await response.json();
+          cachedData = data;
+          return {data}
+        } catch (error) {
+          return {error}
+        } finally {
+          inProgress = null;
+        }
+      }
+      return inProgress;
+    }
+  }
+}
