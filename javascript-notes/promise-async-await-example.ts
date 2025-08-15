@@ -208,16 +208,27 @@ const result4 = profileService4.getProfile();
 export const profileProvider5 = () => {
   let inProgress: any = null;
   let cache: any = null;
+  const callUrl = async () => {
+    try {
+      const response = await fetch("some URL");
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
 
+      const data = await response.json();
+      cache = data;
+      return { data };
+    } catch (err) {
+      return { error: err };
+    } finally {
+      inProgress = null;
+    }
+  };
   return {
     getProfile: async () => {
       if (cache) return { data: cache };
       if (inProgress) return inProgress;
-      inProgress = async () => {
-        try {
-        } catch (err) {}
-      };
-      return inProgress;
+      return callUrl();
     },
   };
 };
