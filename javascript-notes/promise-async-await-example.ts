@@ -16,36 +16,28 @@ You're passing the promise to someone else
 export const profileProvider = () => {
   let inProgress: any = null;
   let cachedData: any = null;
+  const callUrl = async () => {
+    try {
+      const response = await fetch("some URL");
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      cachedData = data;
+      return { data };
+    } catch (error) {
+      return { error };
+    } finally {
+      inProgress = null;
+    }
+  };
 
   return {
     async getProfile() {
-      // Return cached data if available
       if (cachedData) return { data: cachedData };
-
-      // Return existing promise if request is already in progress
       if (inProgress) return inProgress;
-
-      // Create new promise for the fetch operation
-      inProgress = async () => {
-        try {
-          const response = await fetch(
-            "https://jsonplaceholder.typicode.com/users/1"
-          );
-
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-          }
-
-          const data = await response.json();
-          cachedData = data;
-          return { data };
-        } catch (error) {
-          return { error };
-        } finally {
-          inProgress = null;
-        }
-      };
-
+      inProgress = callUrl();
       return inProgress;
     },
   };
@@ -66,43 +58,41 @@ async function example() {
   console.log(result1, result2);
 }
 
-// Reps go here 
+// Reps go here
 /**
- * Write a function that: 
- * - Provides a method to getProfile which makes an API call 
+ * Write a function that:
+ * - Provides a method to getProfile which makes an API call
  * to https://jsonplaceholder.typicode.com/users/1
  * - prevents calling while a call is inProgress
  * - contains a cache to store already fetched data
  * - use the async await pattern
  */
 
-
 export const profileProvider1 = () => {
   let inProgress: any = null;
   let cachedData: any = null;
+  const callUrl = async () => {
+    try {
+      const response = await fetch("some URL");
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      cachedData = data;
+      return { data };
+    } catch (error) {
+      return { error };
+    } finally {
+      inProgress = null;
+    }
+  };
 
   return {
     async getProfile() {
       if (cachedData) return { data: cachedData };
       if (inProgress) return inProgress;
-
-      inProgress = async () => {
-        try {
-          const response = await fetch("some URL");
-
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-          }
-
-          const data = await response.json();
-          cachedData = data;
-          return { data };
-        } catch (error) {
-          return { error };
-        } finally {
-          inProgress = null;
-        };
-      };
+      inProgress = callUrl();
       return inProgress;
     },
   };
@@ -112,41 +102,39 @@ const profileService1 = profileProvider1();
 const promise11 = await profileService1.getProfile();
 
 /**
- * - block multiple calls 
+ * - block multiple calls
  * - cache results
- * - provide a function to fetch api data 
+ * - provide a function to fetch api data
  */
 export const profileProvider2 = () => {
   let inProgress: any = null;
   let cachedData: any = null;
+  const callUrl = async () => {
+    try {
+      const response = await fetch("some URL");
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
 
-  // object which contains a getProfile and clear cache method
-  return {
-    clearCache: () => {},
-    async getProfile() {
-      if (cachedData) return {data: cachedData};
-      if (inProgress) return inProgress;
-
-      inProgress = async () => {
-        try {
-          const response = await fetch("some URL");
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-          }
-          // save to cache and return data if successful
-          const data = await response.json();
-          cachedData = data;
-          return {data}
-        } catch (error) {
-          return {error};
-        } finally {
-          inProgress = null;
-        };
-      };
-      return inProgress;
+      const data = await response.json();
+      cachedData = data;
+      return { data };
+    } catch (error) {
+      return { error };
+    } finally {
+      inProgress = null;
     }
-  }
-}
+  };
+
+  return {
+    async getProfile() {
+      if (cachedData) return { data: cachedData };
+      if (inProgress) return inProgress;
+      inProgress = callUrl();
+      return inProgress;
+    },
+  };
+};
 
 const service2 = profileProvider2();
 const promise2 = await service2.getProfile();
@@ -154,32 +142,32 @@ const promise2 = await service2.getProfile();
 export const profileProvider3 = () => {
   let inProgress: any = null;
   let cachedData: any = null;
+  const callUrl = async () => {
+    try {
+      const response = await fetch("some URL");
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      cachedData = data;
+      return { data };
+    } catch (error) {
+      return { error };
+    } finally {
+      inProgress = null;
+    }
+  };
 
   return {
-    clearCache: () => {},
     async getProfile() {
-      if (cachedData) return {data: cachedData};
+      if (cachedData) return { data: cachedData };
       if (inProgress) return inProgress;
-
-      inProgress = async () => {
-        try {
-          const response = await fetch("some URL");
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-          }
-          const data = await response.json();
-          cachedData = data;
-          return {data}
-        } catch (error) {
-          return {error};
-        } finally {
-          inProgress = null;
-        }
-      }
+      inProgress = callUrl();
       return inProgress;
-    }
-  }
-}
+    },
+  };
+};
 
 const profileService3 = profileProvider3();
 const results3 = await profileService3.getProfile();
@@ -187,28 +175,49 @@ const results3 = await profileService3.getProfile();
 export const profileProvider4 = () => {
   let inProgress: any = null;
   let cachedData: any = null;
+  const callUrl = async () => {
+    try {
+      const response = await fetch("some URL");
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      cachedData = data;
+      return { data };
+    } catch (error) {
+      return { error };
+    } finally {
+      inProgress = null;
+    }
+  };
 
   return {
     async getProfile() {
-      if (cachedData) return {data: cachedData};
+      if (cachedData) return { data: cachedData };
       if (inProgress) return inProgress;
+      inProgress = callUrl();
+      return inProgress;
+    },
+  };
+};
 
+const profileService4 = profileProvider4();
+const result4 = profileService4.getProfile();
+
+export const profileProvider5 = () => {
+  let inProgress: any = null;
+  let cache: any = null;
+
+  return {
+    getProfile: async () => {
+      if (cache) return { data: cache };
+      if (inProgress) return inProgress;
       inProgress = async () => {
         try {
-          const response = await fetch("some URL");
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-          }
-          const data = await response.json();
-          cachedData = data;
-          return {data}
-        } catch (error) {
-          return {error}
-        } finally {
-          inProgress = null;
-        }
-      }
+        } catch (err) {}
+      };
       return inProgress;
-    }
-  }
-}
+    },
+  };
+};
