@@ -232,3 +232,34 @@ export const profileProvider5 = () => {
     },
   };
 };
+
+export const profileProvider6 = () => {
+  let inProgress: any = null;
+  let cache: any = null;
+  const callUrl = async () => {
+    try {
+      const response = await fetch("some URL");
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      cache = data;
+      return { data };
+    } catch (err) {
+      return { error: err }
+    } finally {
+      inProgress = null;
+    }
+  };
+  return {
+    getProfile: async () => {
+      if (cache) return {data: cache};
+      if (inProgress) return inProgress;
+      return callUrl();
+    },
+  };
+};
+
+const profileService6 = profileProvider6();
+const result6 = await profileService6.getProfile();
